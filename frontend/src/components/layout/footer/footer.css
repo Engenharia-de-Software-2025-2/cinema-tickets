@@ -1,0 +1,24 @@
+.footer {
+    width: 100vw;
+    background-color: var(--primary-color);
+    z-index: 1;
+}
+
+.main-footer {
+    display: flex;
+    padding: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.main-footer div p {
+    color: var(--white);
+}
+
+.github-icon {
+    cursor: pointer;
+    max-width: 3rem;
+}

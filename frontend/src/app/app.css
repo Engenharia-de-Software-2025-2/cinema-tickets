@@ -1,0 +1,14 @@
+.layout-box {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-wrapper {
+    display: flex;
+    flex: 1;
+    width: 80vw;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
