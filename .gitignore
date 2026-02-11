@@ -1,16 +1,58 @@
-# env files
+# ENV
 .env
 .env.*
 !.env.example
+application-local.yml
+application-local.yaml
+application-dev.yml
+application-dev.yaml
 
-### IntelliJ IDEA ###
-.idea
+# BUILD
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.ear
+
+# LOGS
+*.log
+logs/
+
+# IntelliJ
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### VS Code ###
+# VS Code
 .vscode/
 
-# Log file
-*.log
+# Windows
+Thumbs.db
+*.stackdump
+
+# Mac
+.DS_Store
+
+# BANCO LOCAL / DUMPS
+*.sql
+*.dump
+*.backup
+
+# ANGULAR / NODE
+node_modules/
+dist/
+.angular/
+coverage/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TEMP
+tmp/
+temp/
+*.tmp
