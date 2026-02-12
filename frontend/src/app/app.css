@@ -7,7 +7,7 @@
 .main-wrapper {
     display: flex;
     flex: 1;
-    width: 80vw;
+    width: 100vw;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
