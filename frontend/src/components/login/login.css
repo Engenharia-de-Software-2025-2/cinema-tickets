@@ -1,0 +1,163 @@
+.page-box {
+    width: 100vw;
+    height: 79.6vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.login-box {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-box {
+    width: 55%;
+    height: 100%;
+    background: url('/popcorn.png');
+    background-size: 7%;
+    background-position: 8%;
+    clip-path: polygon(
+        50% 0%,
+        0% 100%,
+        0% 100%,
+        100% 100%,
+        100% 0%
+    );
+    filter: 
+        brightness(0) 
+        saturate(100%) 
+        invert(70%) 
+        sepia(67%) 
+        saturate(892%) 
+        hue-rotate(343deg) 
+        brightness(103%) 
+        contrast(101%);
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 5rem 4rem;
+}
+
+.login-wrapper h1 {
+    font-family: 'Courier New', monospace;
+    color: var(--secondary-color);
+    font-weight: semibold;
+    font-size: 2.7rem;
+    margin-bottom: 3rem;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.form-login label {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.input-group {
+    margin-bottom: 1.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-login input {
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    height: 2.6rem;
+    padding: 0.7rem;
+    border-radius: 0.4rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-login input.ng-invalid.ng-touched {
+    border-color: var(--danger);
+    border-width: 2px;
+}
+
+.form-login input:focus-visible {
+    border: 2px solid var(--secondary-color);
+    outline: none;
+}
+
+.form-login input.loading,
+.form-login button.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.form-login button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 0.3rem;
+    min-height: 1.4rem;
+}
+
+.error-messages small {
+    color: var(--danger);
+    font-size: 0.85rem;
+    text-align: right;
+    display: block;
+    line-height: 1.2;
+}
+
+.form-login button {
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.6rem;
+    color: white;
+    background-color: var(--secondary-color);
+    width: 9rem;
+    height: 2.4rem;
+    align-self: center;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.form-login button:hover {
+    color: var(--secondary-color);
+    background-color: white;
+}
+
+.form-login button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+}
+
+.form-login button:disabled:hover {
+    background-color: #ccc;
+    color: #666;
+    border-color: #ccc;
+}
+
+.register {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.register-link {
+    color: var(--secondary-color);
+    text-decoration: underline;
+    margin-left: 0.3rem;
+}
