@@ -52,7 +52,7 @@ import Swal from 'sweetalert2';
   styleUrl: './login.css',
 })
 export class Login {
-  private authService = inject(AuthMock);
+  private authService = inject(AuthService);
   private router = inject(Router);
   loginForm: FormGroup;
 
