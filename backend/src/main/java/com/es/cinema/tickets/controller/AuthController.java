@@ -1,6 +1,8 @@
 package com.es.cinema.tickets.controller;
 
 import com.es.cinema.tickets.dto.AuthResponse;
+import com.es.cinema.tickets.dto.LoginRequest;
+import com.es.cinema.tickets.dto.LoginResponse;
 import com.es.cinema.tickets.dto.RegisterRequest;
 import com.es.cinema.tickets.service.AuthService;
 import jakarta.validation.Valid;
@@ -27,4 +29,10 @@ public class AuthController {
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+
 }
