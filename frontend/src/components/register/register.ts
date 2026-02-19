@@ -131,13 +131,14 @@ export class Register {
 
     try {
       const result = await this.authService.register(this.registerForm.value);
+      const errorMsg = result.message?.includes("could") ? "CPF já cadastrado!" : result.message;
 
       if (result.success) {
         await Swal.fire({
           icon: 'success',
           title: 'Sucesso!',
           text: 'Sua conta no Cinema Tickets foi criada!',
-          confirmButtonColor: '#c91432',
+          confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--success').trim(),
         });
         this.router.navigate(['/']); // Redireciona para o login
       } else {
@@ -146,8 +147,8 @@ export class Register {
         Swal.fire({
           icon: 'error',
           title: 'Ops...',
-          text: "Não foi possível realizar o cadastro",
-          confirmButtonColor: '#c91432',
+          text: errorMsg,
+          confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
         });
         
       }
@@ -158,7 +159,7 @@ export class Register {
         icon: 'error',
         title: 'Erro',
         text: 'Não foi possível conectar ao servidor.',
-        confirmButtonColor: '#c91432',
+        confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
       });
     } finally {
       this.isLoading = false;

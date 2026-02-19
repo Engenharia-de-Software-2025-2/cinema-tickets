@@ -57,7 +57,6 @@ export class Login {
   loginForm: FormGroup;
 
   isLoading = false;
-  errorMsg = '';
 
   constructor(private fb: FormBuilder){
     this.loginForm = this.fb.group({
@@ -82,7 +81,6 @@ export class Login {
       return;
     }
 
-    this.errorMsg = '';
     this.isLoading = true;
 
     const { email, password } = this.loginForm.value;
@@ -93,21 +91,19 @@ export class Login {
       if(result.success){
         this.router.navigate(['/home']);
       } else {
-        this.errorMsg = result.message || "Falha no login.";
         Swal.fire({
           icon: 'error',
           title: 'Ops...',
-          text: this.errorMsg || 'Falha no login',
-          confirmButtonColor: '#c91432',
+          text: 'Falha no login, essa conta não existe!',
+          confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
         });
       }
     } catch(e: any) {
-      this.errorMsg = "Por favor tente novamente";
       Swal.fire({
         icon: 'error',
         title: 'Erro',
-        text: 'Erro ao conectar com o servidor!',
-        confirmButtonColor: '#c91432',
+        text: 'Erro ao conectar com o servidor, por favor tente novamente mais tarde!',
+        confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
       });
     } finally {
       this.isLoading = false;
