@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,15 +40,36 @@ public class Filme {
     @Column(nullable = false)
     private int duracao;
 
-    private List<String> generos;
+    @ElementCollection
+    @CollectionTable(
+            name = "filme_generos",
+            joinColumns = @JoinColumn(name = "filme_id", nullable = false)
+    )
+    @Column(name = "genero", nullable = false)
+    @Builder.Default
+    private List<String> generos = new ArrayList<>();
 
-    private List<String> diretores;
+    @ElementCollection
+    @CollectionTable(
+            name = "filme_diretores",
+            joinColumns = @JoinColumn(name = "filme_id", nullable = false)
+    )
+    @Column(name = "diretor", nullable = false)
+    @Builder.Default
+    private List<String> diretores = new ArrayList<>();
 
     @NotBlank
     @Column(columnDefinition = "TEXT")
     private String sinopse;
 
-    private List<String> elenco;
+    @ElementCollection
+    @CollectionTable(
+            name = "filme_elenco",
+            joinColumns = @JoinColumn(name = "filme_id", nullable = false)
+    )
+    @Column(name = "ator", nullable = false)
+    @Builder.Default
+    private List<String> elenco = new ArrayList<>();
 
     @NotNull
     @Enumerated(EnumType.STRING)
