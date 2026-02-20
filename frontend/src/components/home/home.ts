@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MoviesService } from '../../general-service/movies-service/movies-service';
 import { RoomService } from '../../general-service/room-service/room-service';
 import { SessionService } from '../../general-service/session-service/session-service';
-import { MoviesCarousel } from '../films-carousel/movies-carousel';
+import { MoviesCarousel } from '../movies-carousel/movies-carousel';
 
 @Component({
   selector: 'app-home',
@@ -91,25 +91,26 @@ export class Home implements OnInit {
   private async loadMovies() {
     try {
       this.movies = await this.filmsService.getMovies();
+      console.log('🎟️ Filmes carregados:', this.movies.length);
     } catch (error) {
       console.error('Erro ao carregar filmes:', error);
     }
   }
 
   private async loadSessions() {
-    try {
-      const allSessions = await this.sessionService.getSessions();
-      this.sessions = allSessions.filter(s => 
-        s.inicio.startsWith(this.selectedDate)
-      );
-    } catch (error) {
-      console.error('Erro ao carregar sessões:', error);
-    }
+  try {
+    this.sessions = await this.sessionService.getSessionsByDate(this.selectedDate);
+    console.log('🎟️ Sessões carregadas:', this.sessions.length);
+  } catch (error) {
+    console.error('Erro ao carregar sessões:', error);
+    this.sessions = [];
   }
+}
 
   private async loadRooms() {
     try {
       this.rooms = await this.roomService.getRooms();
+      console.log('🎟️ Salas carregadas:', this.rooms.length);
     } catch (e) {
       console.error('Erro ao carregar salas:', e);
     }

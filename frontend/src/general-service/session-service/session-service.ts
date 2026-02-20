@@ -5,7 +5,7 @@ import { SessionModel } from '../../app/core/models/session.model';
   providedIn: 'root',
 })
 export class SessionService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://localhost:8080';
 
   private getHeaders() {
     const token = localStorage.getItem('token');
@@ -22,6 +22,11 @@ export class SessionService {
 
   async getSessionById(id: number): Promise<any> {
     const response = await fetch(`${this.baseUrl}/sessoes/${id}`);
+    return response.json();
+  }
+
+  async getSessionsByDate(date: string): Promise<any[]> {
+    const response = await fetch(`${this.baseUrl}/sessoes?data=${date}`);
     return response.json();
   }
 
