@@ -1,3 +1,6 @@
+-- Limpa os dados antigos e reinicia as contagens de ID para evitar duplicidade
+TRUNCATE TABLE sessoes, salas, filmes RESTART IDENTITY CASCADE;
+
 INSERT INTO filmes
 (titulo, sinopse, duracao, status, classificacao, poster, backdrop)
 VALUES
@@ -131,3 +134,49 @@ INSERT INTO filme_elenco (filme_id, ator) VALUES
       (6, 'Rumi Hiiragi'), (6, 'Miyu Irino'), (6, 'Mari Natsuki'), (6, 'Takashi Naitô'), (6, 'Yasuko Sawaguchi'), (6, '我修院達也'),
       (7, 'Christian Bale'), (7, 'Heath Ledger'), (7, 'Aaron Eckhart'), (7, 'Michael Caine'), (7, 'Maggie Gyllenhaal'), (7, 'Gary Oldman'),
       (8, 'Tom Hanks'), (8, 'David Morse'), (8, 'Bonnie Hunt'), (8, 'Michael Clarke Duncan'), (8, 'James Cromwell'), (8, 'Michael Jeter');
+
+INSERT INTO salas (nome, capacidade) VALUES ('Sala IMAX', 120);
+INSERT INTO salas (nome, capacidade) VALUES ('Sala 02 - VIP', 45);
+INSERT INTO salas (nome, capacidade) VALUES ('Sala 03 - 3D', 80);
+INSERT INTO salas (nome, capacidade) VALUES ('Sala 04 - Standard', 100);
+
+-- Um Sonho de Liberdade (Filme 1) na Sala IMAX (Sala 1)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 14:00:00', 'Legendado', 1, 1);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 18:00:00', 'Legendado', 1, 1);
+
+-- O Poderoso Chefão (Filme 2) na Sala VIP (Sala 2)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 15:30:00', 'Legendado', 2, 2);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 19:30:00', 'Legendado', 2, 2);
+
+-- A Viagem de Chihiro (Filme 6) na Sala 3D (Sala 3)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 13:00:00', 'Dublado 3D', 6, 3);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 16:00:00', 'Dublado 3D', 6, 3);
+
+-- Batman: O Cavaleiro das Trevas (Filme 7) na Sala Standard (Sala 4)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-19 20:00:00', 'Dublado', 7, 4);
+
+-- A Lista de Schindler (Filme 4) na Sala IMAX (Sala 1)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 15:00:00', 'Legendado', 4, 1);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 19:00:00', 'Legendado', 4, 1);
+
+-- 12 Homens e uma Sentença (Filme 5) na Sala VIP (Sala 2)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 14:00:00', 'Legendado', 5, 2);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 16:30:00', 'Legendado', 5, 2);
+
+-- À Espera de um Milagre (Filme 8) na Sala 3D (Sala 3) - (Exibição normal na sala 3D)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 18:30:00', 'Dublado', 8, 3);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-20 22:00:00', 'Legendado', 8, 3);
+
+-- Maratona O Poderoso Chefão na Sala VIP (Sala 2)
+-- Parte I (Filme 2)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 14:00:00', 'Legendado', 2, 2);
+-- Parte II (Filme 3)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 18:00:00', 'Legendado', 3, 2);
+
+-- Batman (Filme 7) na Sala IMAX (Sala 1)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 16:00:00', 'Legendado', 7, 1);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 20:30:00', 'Legendado', 7, 1);
+
+-- Chihiro (Filme 6) na Sala Standard (Sala 4)
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 10:00:00', 'Dublado', 6, 4);
+INSERT INTO sessoes (inicio, tipo, filme_id, sala_id) VALUES ('2026-02-21 13:30:00', 'Dublado', 6, 4);
