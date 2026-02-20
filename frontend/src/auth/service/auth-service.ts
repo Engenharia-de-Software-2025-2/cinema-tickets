@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,23 @@ export class AuthService {
 
     getToken(): string | null {
         return localStorage.getItem('token');
+    }
+
+    getUserRole(): string {
+      const token = this.getToken();
+      if (!token) return '';
+      
+      try {
+        const decoded: any = jwtDecode(token);
+        return decoded.role || '';
+      } catch (error) {
+        console.error('Erro ao decodificar token:', error);
+        return '';
+      }
+    }
+
+    isAdmin(): boolean {
+      return this.getUserRole() === 'ADMIN';
     }
 
     async register(userData: any): Promise<{success: boolean; message?: string}> {
