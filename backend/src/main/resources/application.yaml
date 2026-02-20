@@ -24,6 +24,7 @@ spring:
       ddl-auto: validate
     properties:
       hibernate:
+        default_batch_fetch_size: 50
         format_sql: false
         jdbc:
           time_zone: America/Sao_Paulo
