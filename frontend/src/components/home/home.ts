@@ -92,6 +92,7 @@ export class Home implements OnInit {
     try {
       this.movies = await this.filmsService.getMovies();
       console.log('🎟️ Filmes carregados:', this.movies.length);
+      console.log(this.movies);
     } catch (error) {
       console.error('Erro ao carregar filmes:', error);
     }

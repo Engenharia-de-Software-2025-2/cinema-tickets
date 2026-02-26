@@ -2,7 +2,6 @@ package com.es.cinema.tickets.web.controller;
 
 import com.es.cinema.tickets.application.service.SalaService;
 import com.es.cinema.tickets.web.dto.response.SalaResponse;
-import com.es.cinema.tickets.web.dto.response.SessaoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

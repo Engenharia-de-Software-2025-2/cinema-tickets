@@ -29,7 +29,13 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
             "/auth/**",
-            "/error",
+            "/error"
+    };
+
+    private static final String[] PUBLIC_CATALOG_ENDPOINTS = {
+            "/filmes/**",
+            "/salas/**",
+            "/sessoes/**"
     };
 
     private static final String[] SWAGGER_ENDPOINTS = {
@@ -57,14 +63,19 @@ public class SecurityConfig {
     public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
         return baseSecurityFilterChain(http)
                 .authorizeHttpRequests(auth -> auth
+                        // públicos
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
+
+                        // swagger permitido em dev
                         .requestMatchers(SWAGGER_ENDPOINTS).permitAll()
+
+                        // actuator totalmente aberto em dev
                         .requestMatchers("/actuator/**").permitAll()
-                        
-                        .requestMatchers(HttpMethod.GET, "/sessoes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/filmes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/salas/**").permitAll()
-                        
+
+                        // catálogo: somente GET público
+                        .requestMatchers(HttpMethod.GET, PUBLIC_CATALOG_ENDPOINTS).permitAll()
+
+                        // o resto exige login (e roles ficam no @PreAuthorize)
                         .anyRequest().authenticated()
                 )
                 .build();
@@ -75,15 +86,20 @@ public class SecurityConfig {
     public SecurityFilterChain prodSecurityFilterChain(HttpSecurity http) throws Exception {
         return baseSecurityFilterChain(http)
                 .authorizeHttpRequests(auth -> auth
+                        // públicos
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
+
+                        // swagger bloqueado em prod
                         .requestMatchers(SWAGGER_ENDPOINTS).denyAll()
+
+                        // actuator: health público e resto ADMIN
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
-                        
-                        .requestMatchers(HttpMethod.GET, "/sessoes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/filmes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/salas/**").permitAll()
-                        
                         .requestMatchers("/actuator/**").hasRole("ADMIN")
+
+                        // catálogo: somente GET público
+                        .requestMatchers(HttpMethod.GET, PUBLIC_CATALOG_ENDPOINTS).permitAll()
+
+                        // qualquer outra coisa exige token
                         .anyRequest().authenticated()
                 )
                 .build();
