@@ -28,6 +28,9 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<sonar.organization>hugomtths</sonar.organization>
+		<sonar.projectKey>hugomtths_cinema-tickets</sonar.projectKey>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
