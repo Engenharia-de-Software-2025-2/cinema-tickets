@@ -35,6 +35,17 @@ services:
       db:
         condition: service_healthy
 
+  frontend:
+    image: cinema-tickets-frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    networks:
+      - public-net
+    depends_on:
+      - backend
+
 networks:
   public-net:
     driver: bridge
