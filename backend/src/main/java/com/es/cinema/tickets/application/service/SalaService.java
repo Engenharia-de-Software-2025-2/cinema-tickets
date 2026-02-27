@@ -1,13 +1,9 @@
 package com.es.cinema.tickets.application.service;
 
-import com.es.cinema.tickets.exception.notfound.FilmeNotFoundException;
 import com.es.cinema.tickets.exception.notfound.SalaNotFoundException;
-import com.es.cinema.tickets.persistence.entity.Filme;
 import com.es.cinema.tickets.persistence.entity.Sala;
-import com.es.cinema.tickets.persistence.entity.Sessao;
 import com.es.cinema.tickets.persistence.repository.SalaRepository;
 import com.es.cinema.tickets.web.dto.response.SalaResponse;
-import com.es.cinema.tickets.web.dto.response.SessaoResponse;
 import com.es.cinema.tickets.web.mapper.SalaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
