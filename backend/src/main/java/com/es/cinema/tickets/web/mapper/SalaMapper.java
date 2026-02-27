@@ -1,8 +1,6 @@
 package com.es.cinema.tickets.web.mapper;
 
 import com.es.cinema.tickets.persistence.entity.Sala;
-import com.es.cinema.tickets.persistence.entity.Sessao;
-import com.es.cinema.tickets.web.dto.response.SalaResponse;
 import com.es.cinema.tickets.web.dto.response.SalaResponse;
 import org.springframework.stereotype.Component;
 
