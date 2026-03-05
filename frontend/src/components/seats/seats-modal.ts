@@ -9,7 +9,7 @@ import { CompraResumo } from '../../app/core/models/checkout.model';
 interface Seats {
   id: string;
   codigo: string;
-  status: 'disponivel' | 'ocupado' | 'selecionado';
+  status: 'disponivel' | 'vendido' | 'selecionado';
   tipo: string;
   valor: number;
 }
@@ -67,7 +67,7 @@ export class SeatsModal implements OnInit {
     }
 
   toggleAssento(assento: Seats) {
-    if (assento.status === 'ocupado') return;
+    if (assento.status === 'vendido') return;
 
     const index = this.selecionados.indexOf(assento.codigo);
 
@@ -83,9 +83,10 @@ export class SeatsModal implements OnInit {
   confirmarSelecao() {
     const dadosParaCheckout: CompraResumo = {
       sessaoId: this.sessaoId,
-      filmeTitulo: this.filme?.titulo || 'Filme',
-      filmePoster: this.filme?.poster || '', // Use sua lógica de getPoster() se preferir
-      salaNome: this.sessaoDados?.sala?.nome || 'Sala Padrão',
+      filmeTitulo: this.filme?.titulo || '',
+      filmePoster: this.filme?.poster || '', 
+      data: this.sessaoDados?.data,
+      salaNome: this.sessaoDados?.sala?.nome || '',
       horario: this.sessaoDados?.horario || '--:--',
       assentosCodigos: this.selecionados,
       assentosIds: this.assentos

@@ -71,7 +71,7 @@
 /* Estados dos assentos */
 .disponivel { background: #e0e0e0; color: #777; }
 .selecionado { background: #c91432 !important; color: white !important; transform: scale(1.1); }
-.ocupado { background: #333; color: #666; cursor: not-allowed; }
+.vendido { background: #333; color: #f5eeee; cursor: not-allowed}
 
 .legend {
     display: flex;
