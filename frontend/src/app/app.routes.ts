@@ -5,6 +5,7 @@ import { authGuard } from '../auth/guard/auth-guard';
 import { Register } from '../components/register/register';
 import { Sessao } from '../components/sessao/sessao';
 import { Movie } from '../components/movie/movie';
+import { Checkout } from '../components/checkout/checkout';
 
 export const routes: Routes = [
     {
@@ -28,5 +29,9 @@ export const routes: Routes = [
     {
         path: 'movie/:id',
         component: Movie
+    },
+    {
+        path: 'checkout',
+        component: Checkout
     },
 ];
