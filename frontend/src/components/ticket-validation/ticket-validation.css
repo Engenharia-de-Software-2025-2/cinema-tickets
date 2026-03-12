@@ -1,0 +1,97 @@
+.validacao-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.busca-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.busca-section input {
+  flex: 1;
+  padding: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.busca-section input:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.busca-section button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.busca-section button:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card-sucesso {
+  background-color: #28a745;
+  color: white;
+}
+
+.resumo-ingresso {
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.resumo-ingresso p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+
+.card-erro {
+  background-color: #dc3545;
+  color: white;
+  text-align: center;
+}
+
+.card-invalido {
+  background-color: #ffc107;
+  color: #333;
+  text-align: center;
+}

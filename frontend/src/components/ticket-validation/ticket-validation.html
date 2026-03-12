@@ -1,0 +1,40 @@
+<div class="validacao-container">
+  <h2>Validar Ingresso</h2>
+
+  <div class="busca-section">
+    <input 
+      #voucherInput
+      type="text" 
+      [(ngModel)]="codigoVoucher" 
+      (input)="aoDigitar()"
+      (keyup.enter)="validarIngresso()"
+      placeholder="Ex: CINE-9988-XP"
+    />
+    <button (click)="validarIngresso()" [disabled]="!codigoVoucher || carregando">
+      {{ carregando ? 'Validando...' : 'Validar Ingresso' }}
+    </button>
+  </div>
+
+  <div class="resultado-section" *ngIf="resultado || erroNaoEncontrado">
+    
+    <div class="card card-sucesso" *ngIf="resultado?.valido">
+      <h3>✅ Acesso Liberado</h3>
+      <div class="resumo-ingresso">
+        <p><strong>Filme:</strong> {{ resultado?.dados_ingresso?.filme }}</p>
+        <p><strong>Cliente:</strong> {{ resultado?.dados_ingresso?.cliente }}</p>
+        <p><strong>Assentos:</strong> {{ resultado?.dados_ingresso?.assentos?.join(', ') }}</p>
+      </div>
+    </div>
+
+    <div class="card card-erro" *ngIf="resultado && !resultado.valido">
+      <h3>❌ Acesso Negado</h3>
+      <p>{{ resultado.mensagem }}</p>
+    </div>
+
+    <div class="card card-invalido" *ngIf="erroNaoEncontrado">
+      <h3>⚠️ Código Inválido</h3>
+      <p>Verifique a digitação e tente novamente.</p>
+    </div>
+
+  </div>
+</div>
