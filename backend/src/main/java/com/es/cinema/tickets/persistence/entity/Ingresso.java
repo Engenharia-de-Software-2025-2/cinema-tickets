@@ -1,5 +1,6 @@
 package com.es.cinema.tickets.persistence.entity;
 
+import com.es.cinema.tickets.persistence.enums.StatusIngresso;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +29,15 @@ public class Ingresso {
     private String codigoAutenticacao;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    @Builder.Default
+    private StatusIngresso status = StatusIngresso.CONFIRMADO;
+
+    @Column(name = "data_hora_entrada")
+    private LocalDateTime dataHoraEntrada;
+
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pedido_id", nullable = false, unique = true)
     private Pedido pedido;
@@ -40,6 +50,11 @@ public class Ingresso {
     @Column(nullable = false)
     @Builder.Default
     private LocalDateTime criadoEm = LocalDateTime.now();
+
+    public void utilizar() {
+        this.status = StatusIngresso.UTILIZADO;
+        this.dataHoraEntrada = LocalDateTime.now();
+    }
 
     @Override
     public String toString() {
