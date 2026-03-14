@@ -1,11 +1,13 @@
 package com.es.cinema.tickets.web.controller;
 
 import com.es.cinema.tickets.application.service.PagamentoService;
+import com.es.cinema.tickets.security.AuthUserDetails;
 import com.es.cinema.tickets.web.dto.request.PagamentoRequest;
 import com.es.cinema.tickets.web.dto.response.PagamentoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,10 @@ public class PagamentoController {
 
     @PostMapping("/processar")
     public ResponseEntity<PagamentoResponse> processar(
-            @Valid @RequestBody PagamentoRequest request
+            @Valid @RequestBody PagamentoRequest request,
+            @AuthenticationPrincipal AuthUserDetails userDetails
     ) {
-        PagamentoResponse response = pagamentoService.processar(request);
+        PagamentoResponse response = pagamentoService.processar(request, userDetails.getId());
         return ResponseEntity.ok(response);
     }
 }
