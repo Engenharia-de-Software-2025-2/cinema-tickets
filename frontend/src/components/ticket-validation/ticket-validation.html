@@ -15,26 +15,34 @@
     </button>
   </div>
 
-  <div class="resultado-section" *ngIf="resultado || erroNaoEncontrado">
-    
-    <div class="card card-sucesso" *ngIf="resultado?.valido">
-      <h3>✅ Acesso Liberado</h3>
-      <div class="resumo-ingresso">
-        <p><strong>Filme:</strong> {{ resultado?.dados_ingresso?.filme }}</p>
-        <p><strong>Cliente:</strong> {{ resultado?.dados_ingresso?.cliente }}</p>
-        <p><strong>Assentos:</strong> {{ resultado?.dados_ingresso?.assentos?.join(', ') }}</p>
+  @if (resultado; as res) {
+    <div class="resultado-section">
+      
+      @if (res.valido && res.dados_ingresso) {
+        <div class="card card-sucesso">
+          <h3>✅ Acesso Liberado</h3>
+          <div class="resumo-ingresso">
+            <p><strong>Filme:</strong> {{ res.dados_ingresso.filme }}</p>
+            <p><strong>Cliente:</strong> {{ res.dados_ingresso.cliente }}</p>
+            <p><strong>Assentos:</strong> {{ res.dados_ingresso.assentos.join(', ') }}</p>
+          </div>
+        </div>
+      } 
+      @else if (!res.valido) {
+        <div class="card card-erro">
+          <h3>❌ Acesso Negado</h3>
+          <p>{{ res.mensagem }}</p>
+        </div>
+      }
+    </div>
+  }
+
+  @if (erroNaoEncontrado) {
+    <div class="resultado-section">
+      <div class="card card-invalido">
+        <h3>⚠️ Código Inválido</h3>
+        <p>Verifique a digitação e tente novamente.</p>
       </div>
     </div>
-
-    <div class="card card-erro" *ngIf="resultado && !resultado.valido">
-      <h3>❌ Acesso Negado</h3>
-      <p>{{ resultado.mensagem }}</p>
-    </div>
-
-    <div class="card card-invalido" *ngIf="erroNaoEncontrado">
-      <h3>⚠️ Código Inválido</h3>
-      <p>Verifique a digitação e tente novamente.</p>
-    </div>
-
-  </div>
+  }
 </div>

@@ -31,8 +31,8 @@ export const routes: Routes = [
     {
         path: 'validar-ingresso',
         component: TicketValidation,
-        canActivate: [authGuard],
-        data: { role: 'ADMIN' }
+        //canActivate: [authGuard],
+        //data: { role: 'ADMIN' }
     },
     {
         path: 'movie/:id',
@@ -40,8 +40,9 @@ export const routes: Routes = [
     },
     {
         path: 'ingressos',
-        component: TicketsPage,
+        component: TicketsPage
     },
+    {
         path: 'checkout',
         component: Checkout
     }
