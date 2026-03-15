@@ -1,11 +1,14 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { TicketValidationService } from '../../general-service/ticket-validation-service/ticket-validation-service';
 import { ValidationResponse } from '../../app/core/models/ticket-validation.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-validation',
-  templateUrl: './ticket-validation.component.html',
-  styleUrls: ['./ticket-validation.component.css']
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './ticket-validation.html',
+  styleUrls: ['./ticket-validation.css']
 })
 export class TicketValidation implements AfterViewInit {
   @ViewChild('voucherInput') voucherInput!: ElementRef;
