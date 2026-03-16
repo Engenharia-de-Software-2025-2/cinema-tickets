@@ -91,14 +91,14 @@ class NotificacaoServiceTest {
 
     @Test
     void listarPorUsuario_shouldReturnOnlyPastOrCurrentNotificacoes() {
-        LocalDateTime agora = LocalDateTime.now();
+        LocalDateTime agora = LocalDateTime.now(java.time.ZoneId.of("America/Sao_Paulo"));
         Long usuarioId = 1L;
 
         Notificacao n1 = Notificacao.builder()
                 .id(1L)
                 .usuarioId(usuarioId)
                 .enviado(true) 
-                .dataEnvioAgendada(agora.minusHours(1)) 
+                .dataEnvioAgendada(agora.minusHours(1))
                 .build();
 
         Notificacao n2 = Notificacao.builder()
