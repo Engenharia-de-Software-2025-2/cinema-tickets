@@ -17,6 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "pedidos")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

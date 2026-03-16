@@ -9,7 +9,6 @@ import java.util.List;
 @Component
 public class SalaMapper {
 
-    // TODO implementar CRUD de salas futuramente
 //    public Sala toEntity(SalaRequest request) {
 //        return Sala.builder()
 //                .nome(request.getNome())

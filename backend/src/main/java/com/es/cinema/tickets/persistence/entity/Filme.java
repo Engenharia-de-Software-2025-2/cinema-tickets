@@ -13,8 +13,8 @@ import java.util.List;
 @Table(name = "filmes")
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Filme {
 
     @Id

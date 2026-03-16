@@ -9,7 +9,6 @@ import java.util.List;
 @Component
 public class FilmeMapper {
 
-    // TODO implementar CRUD de filmes futuramente
 //    public Filme toEntity(FilmeRequest request) {
 //        return Filme.builder()
 //                .titulo(request.getTitulo())

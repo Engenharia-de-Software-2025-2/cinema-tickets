@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "ingressos")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
