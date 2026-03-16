@@ -1,3 +1,25 @@
+/* No seu notification.css */
+
+:host {
+  display: block;
+  position: relative; /* Isso garante que o componente se comporte bem na Navbar */
+  z-index: 9999;     /* Isso coloca o sino e o modal acima de QUALQUER coisa do checkout */
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  width: 320px;
+  background: white !important; /* Garante que o fundo não herde transparências */
+  border-radius: 12px;
+  /* Aumentamos a sombra para ele se destacar do checkout branco */
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3); 
+  z-index: 10000; 
+  margin-top: 15px;
+  border: 1px solid #ddd;
+}
+
 .checkout-wrapper {
   background-color: #fdfdfd;
   display: flex;
