@@ -6,9 +6,7 @@ import com.es.cinema.tickets.persistence.repository.NotificacaoRepository;
 import com.es.cinema.tickets.persistence.repository.SessaoRepository;
 import com.es.cinema.tickets.web.dto.request.NotificacaoRequest;
 import com.es.cinema.tickets.web.dto.response.NotificacaoResponse;
-import com.google.firebase.messaging.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,42 +62,15 @@ public class NotificacaoService {
         );
     }
 
-    @Scheduled(fixedRate = 60000)
-    public void processarNotificacoes() {
-        LocalDateTime agora = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
-        List<Notificacao> pendentes = repository.findByEnviadoFalseAndDataEnvioAgendadaBefore(agora);
-
-        for (Notificacao n : pendentes) {
-            boolean sucesso = enviarFirebase(n);
-            if (sucesso) {
-                n.setEnviado(true);
-                repository.save(n);
-            }
-        }
-    }
-
-    public boolean enviarFirebase(Notificacao n) {
-        Message message = Message.builder()
-            .setToken(n.getDeviceToken())
-            .setNotification(Notification.builder()
-                .setTitle("CineTickets - Lembrete de Sessão")
-                .setBody(n.getMensagem())
-                .build())
-            .build();
-
-        try {
-            FirebaseMessaging.getInstance().send(message);
-            System.out.println("Push enviado para o token: " + n.getDeviceToken());
-            return true;
-        } catch (Exception e) {
-            System.err.println("Erro ao enviar Firebase: " + e.getMessage());
-            return false;
-        }
-    }
-
     @Transactional(readOnly = true)
     public List<Notificacao> listarPorToken(String deviceToken) {
-        return repository.findByDeviceTokenOrderByDataEnvioAgendadaDesc(deviceToken);
+        LocalDateTime agora = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        
+        // Retorna apenas notificações com a data/hora agendada no passado ou no exato momento atual
+        return repository.findByDeviceTokenOrderByDataEnvioAgendadaDesc(deviceToken)
+                .stream()
+                .filter(n -> !n.getDataEnvioAgendada().isAfter(agora))
+                .toList();
     }
 
     @Transactional

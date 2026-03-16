@@ -26,26 +26,6 @@ public class NotificacaoController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/teste-imediato")
-    public ResponseEntity<String> testeImediato(@RequestBody Map<String, String> payload) {
-        String token = payload.get("deviceToken");
-        
-        Notificacao notificacaoFake = Notificacao.builder()
-                .deviceToken(token)
-                .mensagem("Teste de notificação imediata! 🚀")
-                .tituloFilme("Filme Teste")
-                .sala("Sala Teste")
-                .horario("00:00")
-                .visto(false)
-                .dataEnvioAgendada(LocalDateTime.now())
-                .sessaoId(0L)
-                .enviado(false)
-                .build();
-
-        service.enviarFirebase(notificacaoFake); 
-        return ResponseEntity.ok("Tentativa de envio processada!");
-    }
-
     @GetMapping("/{deviceToken}")
     public ResponseEntity<List<Notificacao>> listarPorToken(@PathVariable String deviceToken) {
         return ResponseEntity.ok(service.listarPorToken(deviceToken));

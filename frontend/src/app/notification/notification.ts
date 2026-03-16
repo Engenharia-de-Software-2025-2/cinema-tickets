@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationService } from '../../general-service/notification-service/notification.service';
+import { NotificationService } from '../../general-service/notification/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -14,18 +14,16 @@ export class NavbarComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
 
   dropdownAberto = false;
-  notificacoes: any[] = []; 
+  notificacoes: any[] = [];
   notificacoesPendentes = 0;
 
   ngOnInit() {
-    this.notificationService.currentMessage.subscribe((payload) => {
-      const titulo = payload.notification?.title || 'Lembrete de Sessão';
-      const corpo = payload.notification?.body || 'Sua sessão está prestes a começar!';
-
-      this.adicionarNotificacao(`${titulo} - ${corpo}`);
-    });
-
     this.carregarHistorico();
+
+    // Puxa as notificações do backend a cada 30 segundos silenciosamente
+    setInterval(() => {
+      this.carregarHistorico();
+    }, 30000);
   }
 
   toggleDropdown() {
@@ -53,16 +51,6 @@ export class NavbarComponent implements OnInit {
       }
       this.cdr.detectChanges();
     }
-  }
-
-  adicionarNotificacao(msg: string) {
-    this.notificacoes.unshift({
-      mensagem: msg,
-      horario: new Date(),
-      lida: false,
-    });
-    this.notificacoesPendentes++;
-    this.cdr.detectChanges();
   }
 
   limparTudo() {
