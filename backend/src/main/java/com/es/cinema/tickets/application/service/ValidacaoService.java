@@ -94,4 +94,9 @@ public class ValidacaoService {
         LocalDateTime limiteSuperior = inicioSessao.plusHours(toleranciaHoras);
         return !agora.isBefore(limiteInferior) && !agora.isAfter(limiteSuperior);
     }
+
+    // adicionar dentro da classe
+    void setToleranciaHoras(int toleranciaHoras) {
+        this.toleranciaHoras = toleranciaHoras;
+    }
 }
