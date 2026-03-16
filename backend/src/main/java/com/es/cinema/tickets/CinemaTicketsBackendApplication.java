@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CinemaTicketsBackendApplication {
 
 	public static void main(String[] args) {
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Fortaleza"));
 		SpringApplication.run(CinemaTicketsBackendApplication.class, args);
 	}
 
