@@ -56,6 +56,10 @@ public class Ingresso {
         this.dataHoraEntrada = LocalDateTime.now();
     }
 
+    public void avaliar() {
+        this.status = StatusIngresso.AVALIADO;
+    }
+
     @Override
     public String toString() {
         return "Ingresso{id=" + id +
