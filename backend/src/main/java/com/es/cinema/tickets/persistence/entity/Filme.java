@@ -86,7 +86,7 @@ public class Filme {
 
     public void registrarAvaliacao(int nota) {
         this.mediaAvaliacao = (this.mediaAvaliacao * this.qtdAvaliacoes + nota)
-                / (double) (this.qtdAvaliacoes + 1);
+                / (this.qtdAvaliacoes + 1);
         this.qtdAvaliacoes++;
     }
 
