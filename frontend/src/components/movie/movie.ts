@@ -3,10 +3,12 @@ import { MoviesService } from '../../general-service/movies-service/movies-servi
 import { SessionService } from '../../general-service/session-service/session-service';
 import { RoomService } from '../../general-service/room-service/room-service';
 import { MovieModel } from '../../app/core/models/movie.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SessionModel } from '../../app/core/models/session.model';
 import { SeatsModal } from '../seats/seats-modal';
+import { AuthService } from '../../auth/service/auth-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movie',
@@ -30,7 +32,9 @@ export class Movie implements OnInit {
     private readonly sessionService: SessionService,
     private readonly roomService: RoomService,
     private readonly route: ActivatedRoute,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +89,19 @@ export class Movie implements OnInit {
   }
 
   openSeatsModal(idSessao: number) {
+    if (!this.authService.isAuthenticated()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Acesso Restrito',
+        text: 'Você precisa estar logado para comprar ingressos!',
+        confirmButtonText: 'Fazer Login',
+        confirmButtonColor: '#E50914'
+      }).then(() => {
+        this.router.navigate(['/login']); 
+      });
+      return; 
+    }
+
     console.log('Botão comprar clicado! ID da Sessão:', idSessao);
     this.idSessionSelected = idSessao;
     this.showModalSeats = true;
