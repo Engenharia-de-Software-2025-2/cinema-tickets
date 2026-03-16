@@ -46,21 +46,21 @@ class NotificacaoServiceTest {
 
         when(sessaoRepository.findWithFilmeAndSalaById(1L)).thenReturn(Optional.of(sessao));
 
-        // Passando a lista de ingressosIds corretamente
         NotificacaoRequest dto = new NotificacaoRequest(
-                List.of(1L),  // ingressosIds
-                30,           // minutosAntecedencia
-                1L,           // sessaoId
-                "token123"    // deviceToken
+                List.of(1L), 
+                30, 
+                1L, 
+                "token123"
         );
 
-        NotificacaoResponse response = notificacaoService.agendar(dto);
+        NotificacaoResponse response = notificacaoService.agendar(dto, 1L);
 
         ArgumentCaptor<Notificacao> captor = ArgumentCaptor.forClass(Notificacao.class);
         verify(notificacaoRepository).save(captor.capture());
         Notificacao saved = captor.getValue();
 
         assertEquals("token123", saved.getDeviceToken());
+        assertEquals(1L, saved.getUsuarioId());
         assertEquals("Filme Teste", saved.getTituloFilme());
         assertEquals("Sala 1", saved.getSala());
         assertEquals("20:00", saved.getHorario());
@@ -76,30 +76,31 @@ class NotificacaoServiceTest {
         when(sessaoRepository.findWithFilmeAndSalaById(999L)).thenReturn(Optional.empty());
 
         NotificacaoRequest dto = new NotificacaoRequest(
-                List.of(1L), // ingressosIds
+                List.of(1L), 
                 30,
                 999L,
                 "token123"
         );
 
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                notificacaoService.agendar(dto)
+                notificacaoService.agendar(dto, 1L)
         );
 
         assertTrue(exception.getMessage().contains("Sessão não encontrada"));
     }
 
     @Test
-    void listarPorToken_shouldReturnOnlyPastOrCurrentNotificacoes() {
+    void listarPorUsuario_shouldReturnOnlyPastOrCurrentNotificacoes() {
         LocalDateTime agora = LocalDateTime.now();
+        Long usuarioId = 1L;
 
         Notificacao n1 = Notificacao.builder().id(1L).dataEnvioAgendada(agora.minusMinutes(5)).build();
         Notificacao n2 = Notificacao.builder().id(2L).dataEnvioAgendada(agora.plusMinutes(10)).build();
 
-        when(notificacaoRepository.findByDeviceTokenOrderByDataEnvioAgendadaDesc("token123"))
+        when(notificacaoRepository.findByUsuarioIdOrderByDataEnvioAgendadaDesc(usuarioId))
                 .thenReturn(List.of(n1, n2));
 
-        List<Notificacao> result = notificacaoService.listarPorToken("token123");
+        List<Notificacao> result = notificacaoService.listarPorUsuario(usuarioId);
 
         assertEquals(1, result.size());
         assertEquals(n1.getId(), result.getFirst().getId());
@@ -115,7 +116,6 @@ class NotificacaoServiceTest {
         assertTrue(n.isVisto());
         verify(notificacaoRepository).save(n);
 
-        // alterna novamente
         notificacaoService.alternarVisto(1L);
         assertFalse(n.isVisto());
         verify(notificacaoRepository, times(2)).save(n);
